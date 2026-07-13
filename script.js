@@ -56,6 +56,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("guideFile").addEventListener("change", function () {
     const file = this.files[0];
+    async function testBackend() {
+
+  const response = await fetch("https://script.google.com/macros/s/AKfycbwIMpWSBMevxoYKcQCPPh59PAP-JVEeeEZd9AOoVwxNhLom2bIsfr2RhrG65OS1yTth/exec", {
+
+    method: "POST",
+
+    body: JSON.stringify({
+
+      session: "Test Session",
+
+      lyrics: "Hello World"
+
+    })
+
+  });
+
+  const text = await response.text();
+
+  alert(text);
+
+}
     document.getElementById("guideName").innerText = file ? file.name : "No file selected";
   });
 });
