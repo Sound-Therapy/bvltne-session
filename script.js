@@ -16,6 +16,7 @@ function showLogin() {
 
 function login() {
   const pw = document.getElementById("password").value;
+
   if (pw === "010305") {
     hideAll();
     document.getElementById("producerPage").classList.remove("hidden");
@@ -29,54 +30,69 @@ function startSession() {
 }
 
 function nextProducer() {
-  const session = document.getElementById("sessionName").value.trim();
-  const inst = document.getElementById("instrumentalFile").files.length;
-  const guide = document.getElementById("guideFile").files.length;
-  const lyrics = document.getElementById("lyrics").value.trim();
+  alert("Producer NEXT clicked.");
+}
 
-  if (session === "" || !inst || !guide || lyrics === "") {
-    alert("Please complete all fields.");
-    return;
+async function testBackend() {
+
+  try {
+
+    const response = await fetch(
+      "https://script.google.com/macros/s/AKfycbwIMpWSBMevxoYKcQCPPh59PAP-JVEeeEZd9AOoVwxNhLom2bIsfr2RhrG65OS1yTth/exec",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          session: "Test Session",
+          lyrics: "Hello World"
+        })
+      }
+    );
+
+    const text = await response.text();
+
+    alert(text);
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert("Backend Error");
+
   }
 
-  alert("Success!\n\nNext version will generate the Artist Session.");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("startBtn").addEventListener("click", startSession);
-  document.getElementById("producerLink").addEventListener("click", showLogin);
-  document.getElementById("loginBtn").addEventListener("click", login);
-  document.getElementById("backBtn").addEventListener("click", goHome);
-  document.getElementById("nextBtn").addEventListener("click", nextProducer);
 
-  document.getElementById("instrumentalFile").addEventListener("change", function () {
+  document.getElementById("startBtn")?.addEventListener("click", startSession);
+
+  document.getElementById("producerLink")?.addEventListener("click", showLogin);
+
+  document.getElementById("loginBtn")?.addEventListener("click", login);
+
+  document.getElementById("backBtn")?.addEventListener("click", goHome);
+
+  document.getElementById("nextBtn")?.addEventListener("click", nextProducer);
+
+  document.getElementById("instrumentalFile")?.addEventListener("change", function () {
+
     const file = this.files[0];
-    document.getElementById("instrumentalName").innerText = file ? file.name : "No file selected";
+
+    document.getElementById("instrumentalName").innerText =
+      file ? file.name : "No file selected";
+
   });
 
-  document.getElementById("guideFile").addEventListener("change", function () {
+  document.getElementById("guideFile")?.addEventListener("change", function () {
+
     const file = this.files[0];
-    async function testBackend() {
 
-  const response = await fetch("https://script.google.com/macros/s/AKfycbwIMpWSBMevxoYKcQCPPh59PAP-JVEeeEZd9AOoVwxNhLom2bIsfr2RhrG65OS1yTth/exec", {
-
-    method: "POST",
-
-    body: JSON.stringify({
-
-      session: "Test Session",
-
-      lyrics: "Hello World"
-
-    })
+    document.getElementById("guideName").innerText =
+      file ? file.name : "No file selected";
 
   });
 
-  const text = await response.text();
-
-  alert(text);
-
-}
-    document.getElementById("guideName").innerText = file ? file.name : "No file selected";
-  });
 });
