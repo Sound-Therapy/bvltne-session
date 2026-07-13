@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BVLTN Session</title>
@@ -12,71 +11,57 @@
 <style>
 
 body{
-
     font-family:Arial, Helvetica, sans-serif;
     background:#111;
     color:white;
-
     max-width:600px;
-
     margin:auto;
-
     padding:30px;
-
-}
-
-h1{
-
-    text-align:center;
-
 }
 
 .card{
-
     background:#222;
-
     padding:25px;
-
     border-radius:12px;
+}
 
+h1{
+    text-align:center;
 }
 
 ul{
-
     line-height:2;
-
 }
 
 button{
-
     width:100%;
-
     padding:16px;
-
-    font-size:20px;
-
-    margin-top:20px;
-
+    font-size:18px;
+    margin-top:15px;
     border:none;
-
     border-radius:10px;
-
     cursor:pointer;
-
 }
 
-#producer{
-
+#producerLink{
     text-align:center;
-
-    margin-top:30px;
-
+    margin-top:25px;
     color:#888;
-
-    font-size:13px;
-
     cursor:pointer;
+    font-size:13px;
+}
 
+input{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    font-size:18px;
+    border-radius:8px;
+    border:none;
+}
+
+.hidden{
+    display:none;
 }
 
 </style>
@@ -84,6 +69,12 @@ button{
 </head>
 
 <body>
+
+<!-- ========================= -->
+<!-- HOME -->
+<!-- ========================= -->
+
+<div id="homePage">
 
 <div class="card">
 
@@ -105,19 +96,137 @@ button{
 
 <li>Do not cover the microphone.</li>
 
-<li>All 5 takes must be completed before submission.</li>
+<li>Complete all 5 takes before submission.</li>
 
 </ul>
 
-<button>START</button>
+<button onclick="startSession()">
+START
+</button>
 
 </div>
 
-<div id="producer">
-
+<div id="producerLink" onclick="showLogin()">
 Producer Login
+</div>
 
 </div>
+
+<!-- ========================= -->
+<!-- LOGIN -->
+<!-- ========================= -->
+
+<div id="loginPage" class="hidden">
+
+<div class="card">
+
+<h1>Producer Login</h1>
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button onclick="login()">
+
+Login
+
+</button>
+
+<button onclick="goHome()">
+
+Back
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ========================= -->
+<!-- PRODUCER -->
+<!-- ========================= -->
+
+<div id="producerPage" class="hidden">
+
+<div class="card">
+
+<h1>BVLTN Producer</h1>
+
+<button>
+
+Upload Instrumental
+
+</button>
+
+<button>
+
+Upload Guide Vocal
+
+</button>
+
+<button>
+
+NEXT
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function hideAll(){
+
+document.getElementById("homePage").classList.add("hidden");
+document.getElementById("loginPage").classList.add("hidden");
+document.getElementById("producerPage").classList.add("hidden");
+
+}
+
+function goHome(){
+
+hideAll();
+
+document.getElementById("homePage").classList.remove("hidden");
+
+}
+
+function showLogin(){
+
+hideAll();
+
+document.getElementById("loginPage").classList.remove("hidden");
+
+}
+
+function login(){
+
+const pw=document.getElementById("password").value;
+
+if(pw==="010305"){
+
+hideAll();
+
+document.getElementById("producerPage").classList.remove("hidden");
+
+}
+else{
+
+alert("Wrong password.");
+
+}
+
+}
+
+function startSession(){
+
+alert("Recording page will be built next.");
+
+}
+
+</script>
 
 </body>
 
