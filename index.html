@@ -1,60 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>BVLTN Session</title>
 
 <style>
+
 body{
-    font-family:Arial;
+
+    font-family:Arial, Helvetica, sans-serif;
+    background:#111;
+    color:white;
+
     max-width:600px;
-    margin:40px auto;
+
+    margin:auto;
+
+    padding:30px;
+
+}
+
+h1{
+
     text-align:center;
+
+}
+
+.card{
+
+    background:#222;
+
+    padding:25px;
+
+    border-radius:12px;
+
+}
+
+ul{
+
+    line-height:2;
+
 }
 
 button{
-    padding:12px 20px;
-    margin:10px;
-    font-size:16px;
+
+    width:100%;
+
+    padding:16px;
+
+    font-size:20px;
+
+    margin-top:20px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
 }
+
+#producer{
+
+    text-align:center;
+
+    margin-top:30px;
+
+    color:#888;
+
+    font-size:13px;
+
+    cursor:pointer;
+
+}
+
 </style>
 
 </head>
+
 <body>
+
+<div class="card">
 
 <h1>BVLTN Session</h1>
 
-<p>Your producer has sent you a recording task.</p>
+<p>Please read before recording.</p>
 
-<input type="file" id="guideFile" accept="audio/*">
+<ul>
 
-<br><br>
+<li>Record inside a parked car.</li>
 
-<button onclick="playGuide()">Play Guide</button>
+<li>Turn the engine OFF.</li>
 
-<audio id="player"></audio>
+<li>Close all windows.</li>
 
-<script>
+<li>Use earphones.</li>
 
-function playGuide(){
+<li>Hold your phone naturally.</li>
 
-    const file=document.getElementById("guideFile").files[0];
+<li>Do not cover the microphone.</li>
 
-    if(!file){
-        alert("Select a guide audio first.");
-        return;
-    }
+<li>All 5 takes must be completed before submission.</li>
 
-    const player=document.getElementById("player");
+</ul>
 
-    player.src=URL.createObjectURL(file);
+<button>START</button>
 
-    player.play();
+</div>
 
-}
+<div id="producer">
 
-</script>
+Producer Login
+
+</div>
 
 </body>
+
 </html>
