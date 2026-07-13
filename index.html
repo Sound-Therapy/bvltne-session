@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BVLTN Session</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BVLTN Session</title>
+
+<style>
+body{
+    font-family:Arial;
+    max-width:600px;
+    margin:40px auto;
+    text-align:center;
+}
+
+button{
+    padding:12px 20px;
+    margin:10px;
+    font-size:16px;
+}
+</style>
+
 </head>
 <body>
 
@@ -11,9 +27,34 @@
 
 <p>Your producer has sent you a recording task.</p>
 
-<button>Play Guide</button>
-<button>Record</button>
-<button>Submit</button>
+<input type="file" id="guideFile" accept="audio/*">
+
+<br><br>
+
+<button onclick="playGuide()">Play Guide</button>
+
+<audio id="player"></audio>
+
+<script>
+
+function playGuide(){
+
+    const file=document.getElementById("guideFile").files[0];
+
+    if(!file){
+        alert("Select a guide audio first.");
+        return;
+    }
+
+    const player=document.getElementById("player");
+
+    player.src=URL.createObjectURL(file);
+
+    player.play();
+
+}
+
+</script>
 
 </body>
 </html>
