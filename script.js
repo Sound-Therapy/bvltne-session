@@ -126,6 +126,11 @@ document
     .remove("hidden");
 
 document
+    .getElementById("producerLink")
+    .style
+    .display = "none";
+
+document
     .getElementById("sessionPanel")
     .classList
     .remove("hidden");
@@ -139,6 +144,7 @@ document
         .getElementById("currentLyrics")
         .innerText =
         session.lyrics;
+    window.currentSession = session;
 
 }
 
