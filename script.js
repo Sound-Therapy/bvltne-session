@@ -4,7 +4,7 @@
 
 // ---------- Supabase ----------
 
-const SUPABASE_URL = "https://mipxgufdyykcudfwsijy.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://mipxgufdyykcudfwsijy.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_YJcYWUZqfXZ-vrnAI4DUjw_ZEkhpmoR";
