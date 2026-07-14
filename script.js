@@ -122,7 +122,6 @@ async function testBackend() {
       .upload(
     `${sessionName}/${instrumental.name}`,
     instrumental,
-    { upsert: true }
 );
 
     if (instError) {
@@ -136,7 +135,6 @@ async function testBackend() {
       .upload(
     `${sessionName}/${guide.name}`,
     guide,
-    { upsert: true }
 );
 
     if (guideError) {
