@@ -288,27 +288,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("startBtn")
         ?.addEventListener("click", startSession);
+
     document.getElementById("joinBtn")
-    ?.addEventListener("click", joinSession);
-document.getElementById("readyBtn")
-    ?.addEventListener("click", () => {
+        ?.addEventListener("click", joinSession);
 
-        document
-            .getElementById("joinPanel")
-            .style
-            .display = "none";
+    document.getElementById("readyBtn")
+        ?.addEventListener("click", () => {
 
-        document
-            .getElementById("instructionPanel")
-            .classList
-            .add("hidden");
+            document.getElementById("joinPanel").style.display = "none";
 
-        document
-            .getElementById("sessionPanel")
-            .classList
-            .remove("hidden");
+            document.getElementById("instructionPanel")
+                .classList
+                .add("hidden");
 
-    });
+            document.getElementById("sessionPanel")
+                .classList
+                .remove("hidden");
+
+        });
+
     document.getElementById("producerLink")
         ?.addEventListener("click", showLogin);
 
