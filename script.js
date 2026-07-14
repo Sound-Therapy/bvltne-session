@@ -118,7 +118,7 @@ const session = data[0];
 
     }
 
-   hideAll();
+  hideAll();
 
 document
     .getElementById("homePage")
@@ -131,9 +131,14 @@ document
     .display = "none";
 
 document
-    .getElementById("sessionPanel")
+    .getElementById("instructionPanel")
     .classList
     .remove("hidden");
+
+document
+    .getElementById("sessionPanel")
+    .classList
+    .add("hidden");
 
     document
         .getElementById("currentSessionName")
@@ -285,7 +290,20 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.addEventListener("click", startSession);
     document.getElementById("joinBtn")
     ?.addEventListener("click", joinSession);
+document.getElementById("readyBtn")
+    ?.addEventListener("click", () => {
 
+        document
+            .getElementById("instructionPanel")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("sessionPanel")
+            .classList
+            .remove("hidden");
+
+    });
     document.getElementById("producerLink")
         ?.addEventListener("click", showLogin);
 
