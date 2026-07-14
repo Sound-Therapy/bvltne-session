@@ -93,6 +93,8 @@ async function joinSession() {
         .select("*")
         .eq("session_token", token)
         .single();
+    console.log("TOKEN =", token);
+    console.log("DATA =", data, "ERROR =", error);
 
     if (error) {
 
