@@ -119,11 +119,11 @@ async function testBackend() {
     // 2. Upload Instrumental
     const { error: instError } = await db.storage
         .from("instrumentals")
-        .upload(
-            sessionName + ".mp3",
-            instrumental,
-            { upsert: true }
-        );
+      .upload(
+    `${sessionName}/${instrumental.name}`,
+    instrumental,
+    { upsert: true }
+);
 
     if (instError) {
         alert("Instrumental Upload Failed\n\n" + instError.message);
@@ -133,11 +133,11 @@ async function testBackend() {
     // 3. Upload Instrumental + Guide
     const { error: guideError } = await db.storage
         .from("guides")
-        .upload(
-            sessionName + ".mp3",
-            guide,
-            { upsert: true }
-        );
+      .upload(
+    `${sessionName}/${guide.name}`,
+    guide,
+    { upsert: true }
+);
 
     if (guideError) {
         alert("Guide Upload Failed\n\n" + guideError.message);
