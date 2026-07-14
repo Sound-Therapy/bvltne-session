@@ -290,12 +290,23 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.addEventListener("click", startSession);
     document.getElementById("joinBtn")
     ?.addEventListener("click", joinSession);
-document.getElementById("readyBtn")
-    ?.addEventListener("click", () => {
+<div id="joinPanel">
 
-       id="sessionCode"
+    <label><b>Session Code</b></label>
 
-    });
+    <br><br>
+
+    <input
+        id="sessionCode"
+        placeholder="Enter Session Code">
+
+    <br><br>
+
+    <button id="joinBtn">
+        Join Session
+    </button>
+
+</div>
     document.getElementById("producerLink")
         ?.addEventListener("click", showLogin);
 
