@@ -134,7 +134,10 @@ document
     .getElementById("instructionPanel")
     .classList
     .remove("hidden");
-
+document
+    .getElementById("joinPanel")
+    .style
+    .display = "none";
 document
     .getElementById("sessionPanel")
     .classList
