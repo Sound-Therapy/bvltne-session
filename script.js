@@ -74,19 +74,24 @@ function startSession() {
 
 async function testBackend() {
 
-    const sessionName =
-        document.getElementById("sessionName").value.trim();
+    const sessionName = document.getElementById("sessionName").value.trim();
+    const lyrics = document.getElementById("lyrics").value.trim();
 
-    const lyrics =
-        document.getElementById("lyrics").value.trim();
+    const instrumental =
+        document.getElementById("instrumentalFile").files[0];
 
-    if (sessionName === "") {
+    const guide =
+        document.getElementById("guideFile").files[0];
 
-        alert("Please enter a Session Name.");
+    if (!sessionName) {
+
+        alert("Please enter Session Name.");
 
         return;
 
     }
+
+    // Database 저장
 
     const { error } = await db
         .from("sessions")
@@ -99,15 +104,13 @@ async function testBackend() {
 
     if (error) {
 
-        console.error(error);
-
         alert(error.message);
 
         return;
 
     }
 
-    alert("Session Saved!");
+    alert("Session saved.\n\nNext step: Upload will be added.");
 
 }
 
