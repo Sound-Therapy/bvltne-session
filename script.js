@@ -290,23 +290,25 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.addEventListener("click", startSession);
     document.getElementById("joinBtn")
     ?.addEventListener("click", joinSession);
-<div id="joinPanel">
+document.getElementById("readyBtn")
+    ?.addEventListener("click", () => {
 
-    <label><b>Session Code</b></label>
+        document
+            .getElementById("joinPanel")
+            .style
+            .display = "none";
 
-    <br><br>
+        document
+            .getElementById("instructionPanel")
+            .classList
+            .add("hidden");
 
-    <input
-        id="sessionCode"
-        placeholder="Enter Session Code">
+        document
+            .getElementById("sessionPanel")
+            .classList
+            .remove("hidden");
 
-    <br><br>
-
-    <button id="joinBtn">
-        Join Session
-    </button>
-
-</div>
+    });
     document.getElementById("producerLink")
         ?.addEventListener("click", showLogin);
 
