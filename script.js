@@ -118,17 +118,17 @@ const session = data[0];
 
     }
 
-    hideAll();
+   hideAll();
 
-    document
-        .getElementById("producerPage")
-        .classList
-        .remove("hidden");
+document
+    .getElementById("homePage")
+    .classList
+    .remove("hidden");
 
-    document
-        .getElementById("sessionPanel")
-        .classList
-        .remove("hidden");
+document
+    .getElementById("sessionPanel")
+    .classList
+    .remove("hidden");
 
     document
         .getElementById("currentSessionName")
