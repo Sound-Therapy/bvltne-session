@@ -63,9 +63,55 @@ function login() {
 
 }
 
-function startSession() {
+async function startSession() {
 
-    alert("Artist page will be built next.");
+    const params = new URLSearchParams(window.location.search);
+
+    const sessionToken = params.get("session");
+
+    if (!sessionToken) {
+
+        alert("No session link.");
+
+        return;
+
+    }
+
+    const { data, error } = await db
+        .from("sessions")
+        .select("*")
+        .eq("session_token", sessionToken)
+        .single();
+
+    if (error) {
+
+        alert("Session not found.");
+
+        return;
+
+    }
+
+    hideAll();
+
+    document
+        .getElementById("producerPage")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("sessionPanel")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("currentSessionName")
+        .innerText =
+        data.session_name;
+
+    document
+        .getElementById("currentLyrics")
+        .innerText =
+        data.lyrics;
 
 }
 
