@@ -97,91 +97,105 @@ async function testBackend() {
     }
 
     if (!guide) {
-        alert("Please select an Instrumental + Guide file.");
+        alert("Please select a Guide Vocal file.");
         return;
     }
 
-    
+    // Safe filenames
 
-    // 2. Upload Instrumental
-    const { data: instData, error: instError } = await db.storage
+    const safeInstName =
+        instrumental.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+
+    const safeGuideName =
+        guide.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+
+    // Upload Instrumental
+
+    const {
+        data: instData,
+        error: instError
+    } = await db.storage
         .from("instrumentals")
-      .upload(
-    `${sessionName}/${instrumental.name}`,
-    instrumental,
-);
+        .upload(
+            `${sessionName}/${safeInstName}`,
+            instrumental
+        );
 
     if (instError) {
         alert("Instrumental Upload Failed\n\n" + instError.message);
         return;
     }
 
-    // 3. Upload Instrumental + Guide
-    const { data: guideData, error: guideError } = await db.storage
+    // Upload Guide
+
+    const {
+        data: guideData,
+        error: guideError
+    } = await db.storage
         .from("guides")
-      .upload(
-    `${sessionName}/${guide.name}`,
-    guide,
-);
+        .upload(
+            `${sessionName}/${safeGuideName}`,
+            guide
+        );
 
     if (guideError) {
         alert("Guide Upload Failed\n\n" + guideError.message);
         return;
     }
-// 4. Save session to database
-const { error: dbError } = await db
-    .from("sessions")
-    .insert([
-        {
-            session_name: sessionName,
-            lyrics: lyrics,
-            instrumental_path: instData.path,
-            guide_path: guideData.path
-        }
-    ]);
 
-if (dbError) {
-    alert(dbError.message);
-    return;
+    // Generate Session Token
+
+    const sessionToken =
+        Math.random()
+            .toString(36)
+            .substring(2, 8)
+            .toUpperCase();
+
+    // Save Session
+
+    const { error: dbError } = await db
+        .from("sessions")
+        .insert([
+            {
+                session_name: sessionName,
+                session_token: sessionToken,
+                lyrics: lyrics,
+                instrumental_path: instData.path,
+                guide_path: guideData.path
+            }
+        ]);
+
+    if (dbError) {
+        alert(dbError.message);
+        return;
+    }
+
+    // Show Session Panel
+
+    document
+        .getElementById("sessionPanel")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("currentSessionName")
+        .innerText =
+        sessionName;
+
+    document
+        .getElementById("currentLyrics")
+        .innerText =
+        lyrics;
+
+    const sessionLink =
+        window.location.origin +
+        window.location.pathname +
+        "?session=" +
+        sessionToken;
+
+    alert(
+        "Session Created Successfully!\n\n" +
+        sessionLink
+    );
+
 }
-    alert("Session Created Successfully!");
-
-}
-
-// ---------- Events ----------
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    document.getElementById("startBtn")
-        ?.addEventListener("click", startSession);
-
-    document.getElementById("producerLink")
-        ?.addEventListener("click", showLogin);
-
-    document.getElementById("loginBtn")
-        ?.addEventListener("click", login);
-
-    document.getElementById("backBtn")
-        ?.addEventListener("click", goHome);
-
-    document.getElementById("instrumentalFile")
-        ?.addEventListener("change", function () {
-
-            const file = this.files[0];
-
-            document.getElementById("instrumentalName").innerText =
-                file ? file.name : "No file selected";
-
-        });
-
-    document.getElementById("guideFile")
-        ?.addEventListener("change", function () {
-
-            const file = this.files[0];
-
-            document.getElementById("guideName").innerText =
-                file ? file.name : "No file selected";
-
-        });
-
-});
