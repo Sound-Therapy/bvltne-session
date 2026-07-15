@@ -114,8 +114,12 @@ data.forEach(session => {
     Open
 </button>
 
-<button class="deleteBtn">
+<button
+    class="deleteBtn"
+    onclick="deleteSession('${session.id}')">
+
     Delete
+
 </button>
 
 <hr>
@@ -125,6 +129,19 @@ data.forEach(session => {
 
 });
 }
+
+function deleteSession(id) {
+
+    const ok = confirm(
+        "Delete this session?\n\nThis cannot be undone."
+    );
+
+    if (!ok) return;
+
+    alert("Delete function coming next.");
+
+}
+
 async function startSession() {
 
     document
