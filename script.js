@@ -139,20 +139,27 @@ async function deleteSession(id) {
         return;
     }
 
+    // 데이터타입 문제를 방지하기 위해 id를 숫자(Number)로 확실하게 변환합니다.
+    const numericId = Number(id);
+
+    console.log("Trying to delete session ID:", numericId);
+
     const { data, error } = await db
-    .from("sessions")
-    .delete()
-    .eq("id", id)
-    .select();
-console.log(data);
-console.log(error);
+        .from("sessions")
+        .delete()
+        .eq("id", numericId)
+        .select();
+
+    console.log("Delete Result Data:", data);
+    console.log("Delete Result Error:", error);
+
     if (error) {
-        alert(error.message);
+        alert("Delete failed: " + error.message);
         return;
     }
 
+    // 정상적으로 지워졌다면 목록을 새로고침합니다.
     await showSessionManager();
-
 }
 
 async function startSession() {
