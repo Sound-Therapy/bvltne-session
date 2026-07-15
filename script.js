@@ -97,11 +97,7 @@ async function showSessionManager() {
         alert(error.message);
 
     }
-const list = document.getElementById("sessionList");
-
-list.innerHTML = "";
-
-ata.forEac
+onst list = document.getElementBy
 }
 
 async function deleteSession(id) {
