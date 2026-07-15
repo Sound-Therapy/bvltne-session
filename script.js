@@ -100,7 +100,7 @@ async function showSessionManager() {
     list.innerHTML = "";
 
     data.forEach(session => {
-
+        console.log("SESSION =", session);
         list.innerHTML += `
             <div class="card">
 
