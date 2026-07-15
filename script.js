@@ -116,7 +116,7 @@ data.forEach(session => {
 
 <button
     class="deleteBtn"
-    onclick="deleteSession('${session.id}')">
+    onclick="deleteSession('${session.session_name}')">
 
     Delete
 
@@ -138,7 +138,7 @@ function deleteSession(id) {
 
     if (!ok) return;
 
-    alert("Delete function coming next.");
+    alert("Delete: " + id);
 
 }
 
