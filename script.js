@@ -89,7 +89,7 @@ async function showSessionManager() {
         .from("sessions")
         .select("*")
         .order("created_at", { ascending: false });
-
+    console.log("DATA =", JSON.stringify(data));
     if (error) {
         alert(error.message);
         return;
