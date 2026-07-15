@@ -108,9 +108,13 @@ data.forEach(session => {
 
             <h3>${session.session_name}</h3>
 
-            <p><b>Code:</b> ${session.session_token}</p>
+<p><b>Code:</b> ${session.session_token}</p>
 
-            <hr>
+<button>
+    Open
+</button>
+
+<hr>
 
         </div>
     `;
