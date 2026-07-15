@@ -4,10 +4,10 @@
 
 // ---------- Supabase ----------
 
-const SUPABASE_URL = "https://mipxgufdyykcudfwsijy.supabase.co";
+const SUPABASE_URL = "https://qypotzqpbjgnyvraiajk.supabase.co";
 console.log(SUPABASE_URL);
 const SUPABASE_KEY =
-"sb_publishable_YJcYWUZqfXZ-vrnAI4DUjw_ZEkhpmoR";
+"sb_publishable_WJeDy9HerJD_SXy1sA018w_MBTkgsW6";
 
 const db = window.supabase.createClient(
     SUPABASE_URL,
