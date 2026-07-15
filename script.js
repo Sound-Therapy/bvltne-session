@@ -114,7 +114,7 @@ async function showSessionManager() {
 
                 <button
                     class="deleteBtn"
-                    onclick="deleteSession(${session.id})">
+                    onclick="deleteSession(${JSON.stringify(session.id)})">
                     Delete
                 </button>
 
