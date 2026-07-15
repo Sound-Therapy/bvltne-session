@@ -377,10 +377,12 @@ async function testBackend() {
         "?session=" +
         sessionToken;
 
-    alert(
-        "Session Created Successfully!\n\n" +
-        sessionLink
-    );
+   alert(
+    "Session Created Successfully!\n\n" +
+    "Session Code: " + sessionToken +
+    "\n\n" +
+    sessionLink
+);
 
 }
 // ---------- Events ----------
