@@ -5,7 +5,7 @@
 // ---------- Supabase ----------
 
 const SUPABASE_URL = "https://mipxgufdyykcudfwsijy.supabase.co";
-
+console.log(SUPABASE_URL);
 const SUPABASE_KEY =
 "sb_publishable_YJcYWUZqfXZ-vrnAI4DUjw_ZEkhpmoR";
 
