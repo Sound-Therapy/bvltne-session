@@ -73,6 +73,19 @@ function showNewSession() {
         .remove("hidden");
 
 }
+function showSessionManager() {
+
+    document
+        .getElementById("newSessionPanel")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("sessionManagerPanel")
+        .classList
+        .remove("hidden");
+
+}
 async function startSession() {
 
     document
@@ -306,6 +319,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.addEventListener("click", joinSession);
 document.getElementById("newSessionBtn")
     ?.addEventListener("click", showNewSession);
+    document.getElementById("sessionManagerBtn")
+    ?.addEventListener("click", showSessionManager);
     document.getElementById("readyBtn")
         ?.addEventListener("click", () => {
 
