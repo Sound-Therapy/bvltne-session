@@ -73,7 +73,59 @@ function showNewSession() {
         .remove("hidden");
 
 }
-async function showSessionMana
+async function showSessionManager() {
+
+    document
+        .getElementById("newSessionPanel")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("sessionManagerPanel")
+        .classList
+        .remove("hidden");
+
+    const { data, error } = await db
+        .from("sessions")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    const list = document.getElementById("sessionList");
+
+    list.innerHTML = "";
+
+    data.forEach(session => {
+
+        list.innerHTML += `
+            <div class="card">
+
+                <h3>${session.session_name}</h3>
+
+                <p><b>ID:</b> ${session.id}</p>
+
+                <button class="openBtn">
+                    Open
+                </button>
+
+                <button
+                    class="deleteBtn"
+                    onclick="deleteSession(${session.id})">
+                    Delete
+                </button>
+
+                <hr>
+
+            </div>
+        `;
+
+    });
+
+}
 
 async function deleteSession(id) {
 
