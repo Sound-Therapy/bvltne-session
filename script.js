@@ -130,7 +130,7 @@ data.forEach(session => {
 });
 }
 
-function deleteSession(id) {
+async function deleteSession(id) {
 
     const ok = confirm(
         "Delete this session?\n\nThis cannot be undone."
@@ -138,7 +138,20 @@ function deleteSession(id) {
 
     if (!ok) return;
 
-    alert("Delete: " + id);
+    const { error } = await db
+    .from("sessions")
+    .delete()
+    .eq("session_name", id);
+
+if (error) {
+
+    alert(error.message);
+
+    return;
+
+}
+
+showSessionManager();
 
 }
 
