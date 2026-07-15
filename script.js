@@ -135,11 +135,24 @@ async function deleteSession(id) {
 
     if (!ok) return;
 
-    const result = await db
+    const { data, error } = await db
     .from("sessions")
     .delete()
-    .eq("id", id)
+    .eq("id", Number(id))
     .select();
+
+console.log("DELETE ID =", id);
+console.log("DELETE DATA =", data);
+console.log("DELETE ERROR =", error);
+
+if (error) {
+    alert(error.message);
+    return;
+}
+
+alert("Deleted!");
+
+showSessionManager();
 
 console.log(result);
 
