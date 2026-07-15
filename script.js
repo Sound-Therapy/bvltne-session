@@ -107,7 +107,7 @@ async function showSessionManager() {
                 <h3>${session.session_name}</h3>
 
                 <p><b>ID:</b> ${session.id}</p>
-
+                <p><b>Code:</b> ${session.session_token}</p>
                 <button class="openBtn">
                     Open
                 </button>
