@@ -304,7 +304,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("joinBtn")
         ?.addEventListener("click", joinSession);
-
+document.getElementById("newSessionBtn")
+    ?.addEventListener("click", showNewSession);
     document.getElementById("readyBtn")
         ?.addEventListener("click", () => {
 
