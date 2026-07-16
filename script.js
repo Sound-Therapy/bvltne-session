@@ -37,7 +37,8 @@ localStorage.removeItem("producerLoggedIn");
 function logout() {
 
     localStorage.removeItem("producerLoggedIn");
-
+    localStorage.removeItem("artistMode");
+    localStorage.removeItem("artistSession");
     hideAll();
 
     document
@@ -354,7 +355,8 @@ document
         .innerText =
         session.lyrics;
     window.currentSession = session;
-
+    localStorage.setItem("artistMode", "true");
+    localStorage.setItem("artistSession", JSON.stringify(session));
 }
 
 // ---------- Save Session ----------
@@ -549,5 +551,50 @@ document.getElementById("practiceNoGuideBtn")
 if (localStorage.getItem("producerLoggedIn") === "true") {
     hideAll();
     document.getElementById("producerPage").classList.remove("hidden");
+}
+if (localStorage.getItem("artistMode") === "true") {
+
+    const session =
+        JSON.parse(localStorage.getItem("artistSession"));
+
+    window.currentSession = session;
+
+    hideAll();
+
+    document
+        .getElementById("homePage")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("producerLink")
+        .style
+        .display = "none";
+
+    document
+        .getElementById("joinPanel")
+        .style
+        .display = "none";
+
+    document
+        .getElementById("instructionPanel")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("sessionPanel")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("currentSessionName")
+        .innerText =
+        session.session_name;
+
+    document
+        .getElementById("currentLyrics")
+        .innerText =
+        session.lyrics;
+
 }
 });
