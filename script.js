@@ -154,30 +154,15 @@ function playRecording() {
         return;
 
     }
-    const fileName =
-    "take1.webm";
-    const { error } =
-    await db.storage
-        .from("recordings")
-        .upload(
 
-            `${window.currentSession.session_token}/${fileName}`,
+    currentAudio = new Audio(
+        URL.createObjectURL(recordedBlob)
+    );
 
-            recordedBlob,
-
-            {
-                upsert: true
-            }
-
-        );
-    if (error) {
-
-    alert(error.message);
-
-    return;
+    currentAudio.play();
 
 }
-    alert("Take 1 uploaded!");
+
 async function submitRecording() {
 
     if (!recordedBlob) {
@@ -216,13 +201,7 @@ async function submitRecording() {
     alert("Take 1 uploaded!");
 
 }
-    currentAudio = new Audio(
-        URL.createObjectURL(recordedBlob)
-    );
 
-    currentAudio.play();
-
-}
 function rerecord() {
 
     recordedBlob = null;
