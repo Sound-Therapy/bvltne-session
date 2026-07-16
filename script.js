@@ -16,7 +16,7 @@ const db = window.supabase.createClient(
 
 console.log("BVLTNE Connected");
 
-
+let currentAudio = null;
 // ---------- Page Control ----------
 
 function hideAll() {
@@ -77,7 +77,14 @@ function showLogin() {
     document.getElementById("loginPage").classList.remove("hidden");
 
 }
+function stopAudio() {
 
+    if (!currentAudio) return;
+
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+
+}
 function login() {
 
     const pw = document.getElementById("password").value;
@@ -257,10 +264,10 @@ async function playWithGuide() {
         return;
     }
 
-    const audio = new Audio(data.signedUrl);
+    currentAudio = new Audio(data.signedUrl);
 
     try {
-        await audio.play();
+        await currentAudio.play();
     }
     catch (e) {
         alert(e.message);
@@ -288,10 +295,10 @@ async function playWithoutGuide() {
         return;
     }
 
-    const audio = new Audio(data.signedUrl);
+    currentAudio = new Audio(data.signedUrl);
 
     try {
-        await audio.play();
+        await currentAudio.play();
     }
     catch (e) {
         alert(e.message);
