@@ -355,14 +355,30 @@ mediaRecorder = new MediaRecorder(stream);
     recordedBlob = new Blob(recordedChunks, {
     type: mediaRecorder.mimeType
 });
+            document
+    .getElementById("recordingStatus")
+    .classList
+    .add("hidden");
     alert("Recording finished.");
+document
+    .getElementById("recordGuideBtn")
+    .classList
+    .remove("hidden");
 document
     .getElementById("recordingControls")
     .classList
     .remove("hidden");
 };
         mediaRecorder.start();
+document
+    .getElementById("recordGuideBtn")
+    .classList
+    .add("hidden");
 
+document
+    .getElementById("recordingStatus")
+    .classList
+    .remove("hidden");
         
         await playWithGuide();
     }
@@ -589,6 +605,8 @@ async function testBackend() {
 // ---------- Events ----------
 
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("recordStopBtn")
+    ?.addEventListener("click", stopAudio);
     document.getElementById("rerecordBtn")
     ?.addEventListener("click", rerecord);
     document.getElementById("logoutBtn")
