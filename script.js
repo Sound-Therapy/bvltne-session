@@ -203,6 +203,29 @@ async function openSession(id) {
     window.currentSession = data;
 
 }
+async function playWithGuide() {
+
+    if (!window.currentSession) return;
+
+    const { data } = db.storage
+        .from("guides")
+        .getPublicUrl(window.currentSession.guide_path);
+
+    new Audio(data.publicUrl).play();
+
+}
+
+async function playWithoutGuide() {
+
+    if (!window.currentSession) return;
+
+    const { data } = db.storage
+        .from("instrumentals")
+        .getPublicUrl(window.currentSession.instrumental_path);
+
+    new Audio(data.publicUrl).play();
+
+}
 async function startSession() {
 
     document
@@ -457,7 +480,11 @@ document.getElementById("newSessionBtn")
 
     document.getElementById("backBtn")
         ?.addEventListener("click", goHome);
+    document.getElementById("practiceGuideBtn")
+    ?.addEventListener("click", playWithGuide);
 
+document.getElementById("practiceNoGuideBtn")
+    ?.addEventListener("click", playWithoutGuide);
     document.getElementById("instrumentalFile")
         ?.addEventListener("change", function () {
 
