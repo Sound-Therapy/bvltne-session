@@ -526,7 +526,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ?.addEventListener("click", backToHome);
     document.getElementById("startBtn")
         ?.addEventListener("click", startSession);
-
+    document.getElementById("stopBtn")
+    ?.addEventListener("click", stopAudio);
     document.getElementById("joinBtn")
         ?.addEventListener("click", joinSession);
 document.getElementById("newSessionBtn")
