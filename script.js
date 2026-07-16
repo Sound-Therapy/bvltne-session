@@ -324,7 +324,7 @@ async function recordWithGuide() {
         alert("WEBM: " + MediaRecorder.isTypeSupported("audio/webm"));
         alert("WEBM OPUS: " + MediaRecorder.isTypeSupported("audio/webm;codecs=opus"));
 mediaRecorder = new MediaRecorder(stream);
-
+alert(mediaRecorder.mimeType);
         mediaRecorder.ondataavailable = function(event) {
 
             if (event.data.size > 0) {
@@ -337,9 +337,8 @@ mediaRecorder = new MediaRecorder(stream);
         mediaRecorder.onstop = function () {
 
     recordedBlob = new Blob(recordedChunks, {
-        type: "audio/webm"
-    });
-
+    type: mediaRecorder.mimeType
+});
     alert("Recording finished.");
 
 };
