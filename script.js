@@ -47,17 +47,21 @@ function logout() {
         .remove("hidden");
 
 }
-function backToManager() {
+function backToHome() {
 
-    document
-        .getElementById("sessionPanel")
-        .classList
-        .add("hidden");
+    window.currentSession = null;
 
-    document
-        .getElementById("sessionManagerPanel")
-        .classList
-        .remove("hidden");
+    document.getElementById("sessionPanel").classList.add("hidden");
+    document.getElementById("sessionManagerPanel").classList.add("hidden");
+    document.getElementById("newSessionPanel").classList.add("hidden");
+
+    hideAll();
+
+    document.getElementById("homePage").classList.remove("hidden");
+
+    document.getElementById("producerLink").style.display = "";
+    document.getElementById("joinPanel").style.display = "";
+    document.getElementById("instructionPanel").classList.add("hidden");
 
 }
 function showLogin() {
@@ -505,8 +509,8 @@ async function testBackend() {
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("logoutBtn")
     ?.addEventListener("click", logout);
-    document.getElementById("backToManagerBtn")
-    ?.addEventListener("click", backToManager);
+    document.getElementById("backToHomeBtn")
+    ?.addEventListener("click", backToHome);
     document.getElementById("startBtn")
         ?.addEventListener("click", startSession);
 
