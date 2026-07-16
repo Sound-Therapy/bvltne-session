@@ -141,7 +141,7 @@ async function deleteSession(id) {
 
     // 데이터타입 문제를 방지하기 위해 id를 숫자(Number)로 확실하게 변환합니다.
     const numericId = Number(id);
-
+alert("Deleting ID = " + numericId);
     console.log("Trying to delete session ID:", numericId);
 
     const { data, error } = await db
