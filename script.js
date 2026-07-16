@@ -24,7 +24,7 @@ function hideAll() {
     document.getElementById("homePage").classList.add("hidden");
     document.getElementById("loginPage").classList.add("hidden");
     document.getElementById("producerPage").classList.add("hidden");
-localStorage.setItem("producerLoggedIn", "true");
+
 }
 
 function goHome() {
@@ -59,7 +59,7 @@ function login() {
     const pw = document.getElementById("password").value;
 
     if (pw === "010305") {
-
+        localStorage.setItem("producerLoggedIn", "true");
         hideAll();
 
         document.getElementById("producerPage").classList.remove("hidden");
