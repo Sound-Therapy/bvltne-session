@@ -31,9 +31,9 @@ function hideAll() {
 function closeRecordingModal(){
 
     document
-        .getElementById("recordingModal")
-        .classList
-        .add("hidden");
+    .getElementById("recordingModal")
+    .classList
+    .add("hidden");
 
 }
 function goHome() {
@@ -372,7 +372,7 @@ document
     .classList
     .remove("hidden");
 document
-    .getElementById("recordingControls")
+    .getElementById("recordingModal")
     .classList
     .remove("hidden");
 };
