@@ -118,10 +118,11 @@ if (!data || data.length === 0) {
 
                 <p><b>ID:</b> ${session.id}</p>
                 <p><b>Code:</b> ${session.session_token}</p>
-                <button class="openBtn">
-                    Open
-                </button>
-
+                <button
+    class="openBtn"
+    onclick="openSession(${session.id})">
+    Open
+</button>
                 <button
                     class="deleteBtn"
                     onclick="deleteSession(${JSON.stringify(session.id)})">
