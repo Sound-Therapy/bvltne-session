@@ -3,6 +3,7 @@
 // ===============================
 
 // ---------- Supabase ----------
+let recordedBlob = null;
 let mediaRecorder = null;
 let recordedChunks = [];
 const SUPABASE_URL = "https://mipxgufdyykcudfwsijy.supabase.co";
@@ -135,6 +136,23 @@ document
         .getElementById("newSessionPanel")
         .classList
         .remove("hidden");
+
+}
+function playRecording() {
+
+    if (!recordedBlob) {
+
+        alert("No recording.");
+
+        return;
+
+    }
+
+    currentAudio = new Audio(
+        URL.createObjectURL(recordedBlob)
+    );
+
+    currentAudio.play();
 
 }
 async function showSessionManager() {
@@ -313,7 +331,15 @@ async function recordWithGuide() {
             }
 
         };
+        mediaRecorder.onstop = function () {
 
+    recordedBlob = new Blob(recordedChunks, {
+        type: "audio/webm"
+    });
+
+    alert("Recording finished.");
+
+};
         mediaRecorder.start();
 
         await playWithGuide();
