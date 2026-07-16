@@ -274,7 +274,11 @@ async function playWithGuide() {
     }
 
 }
-   
+async function recordWithGuide() {
+
+    await playWithGuide();
+
+}   
 
 async function playWithoutGuide() {
 
@@ -559,7 +563,8 @@ document.getElementById("newSessionBtn")
         ?.addEventListener("click", goHome);
     document.getElementById("practiceGuideBtn")
     ?.addEventListener("click", playWithGuide);
-
+    document.getElementById("recordGuideBtn")
+    ?.addEventListener("click", recordWithGuide);
 document.getElementById("practiceNoGuideBtn")
     ?.addEventListener("click", playWithoutGuide);
     document.getElementById("instrumentalFile")
