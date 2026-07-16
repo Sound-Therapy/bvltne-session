@@ -24,11 +24,11 @@ function hideAll() {
     document.getElementById("homePage").classList.add("hidden");
     document.getElementById("loginPage").classList.add("hidden");
     document.getElementById("producerPage").classList.add("hidden");
-
+localStorage.setItem("producerLoggedIn", "true");
 }
 
 function goHome() {
-
+localStorage.removeItem("producerLoggedIn");
     hideAll();
 
     document.getElementById("homePage").classList.remove("hidden");
@@ -444,5 +444,8 @@ document.getElementById("newSessionBtn")
                 file ? file.name : "No file selected";
 
         });
-
+if (localStorage.getItem("producerLoggedIn") === "true") {
+    hideAll();
+    document.getElementById("producerPage").classList.remove("hidden");
+}
 });
