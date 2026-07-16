@@ -212,9 +212,7 @@ async function playWithGuide() {
     alert(data.publicUrl);
 
 }
-    alert(window.currentSession.guide_path);
-
-}
+   
 
 async function playWithoutGuide() {
 
