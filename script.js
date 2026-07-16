@@ -34,7 +34,18 @@ localStorage.removeItem("producerLoggedIn");
     document.getElementById("homePage").classList.remove("hidden");
 
 }
+function logout() {
 
+    localStorage.removeItem("producerLoggedIn");
+
+    hideAll();
+
+    document
+        .getElementById("homePage")
+        .classList
+        .remove("hidden");
+
+}
 function showLogin() {
 
     hideAll();
@@ -477,7 +488,8 @@ async function testBackend() {
 // ---------- Events ----------
 
 document.addEventListener("DOMContentLoaded", () => {
-
+    document.getElementById("logoutBtn")
+    ?.addEventListener("click", logout);
     document.getElementById("startBtn")
         ?.addEventListener("click", startSession);
 
