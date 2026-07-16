@@ -323,11 +323,9 @@ async function recordWithGuide() {
 
         recordedChunks = [];
 
-        alert("MP4: " + MediaRecorder.isTypeSupported("audio/mp4"));
-        alert("WEBM: " + MediaRecorder.isTypeSupported("audio/webm"));
-        alert("WEBM OPUS: " + MediaRecorder.isTypeSupported("audio/webm;codecs=opus"));
+        
 mediaRecorder = new MediaRecorder(stream);
-alert(mediaRecorder.mimeType);
+
         mediaRecorder.ondataavailable = function(event) {
 
             if (event.data.size > 0) {
@@ -347,7 +345,7 @@ alert(mediaRecorder.mimeType);
 };
         mediaRecorder.start();
 
-        alert("Microphone ready.\n\nPress OK to start recording.");
+        
         await playWithGuide();
     }
 
