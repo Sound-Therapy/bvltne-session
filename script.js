@@ -200,11 +200,22 @@ async function submitRecording() {
         return;
 
     }
+alert(`Take ${currentTake} uploaded!`);
 
-    alert(`Take ${currentTake} uploaded!`);
+closeRecordingModal();
 
-    closeRecordingModal();
+if (currentTake < 5) {
 
+    currentTake++;
+
+    document.getElementById("recordGuideBtn").innerText =
+        `Record Take ${currentTake}`;
+
+} else {
+
+    alert("All 5 takes have been submitted.\n\nThank you!");
+
+}
 }
 
 function rerecord() {
