@@ -169,7 +169,6 @@ async function submitRecording() {
     if (!recordedBlob) {
 
         alert("No recording.");
-
         return;
 
     }
@@ -196,28 +195,32 @@ async function submitRecording() {
     if (error) {
 
         alert(error.message);
-
         return;
 
     }
-alert(`Take ${currentTake} uploaded!`);
 
-closeRecordingModal();
+    closeRecordingModal();
 
-if (currentTake < 5) {
+    if (currentTake < 5) {
 
-    currentTake++;
+        alert(`Take ${currentTake} uploaded!`);
 
-    document.getElementById("recordGuideBtn").innerText =
-        `Record Take ${currentTake}`;
+        currentTake++;
 
-} else {
+        document.getElementById("recordGuideBtn").innerText =
+            `Record Take ${currentTake}`;
 
-    alert("All 5 takes have been submitted.\n\nThank you!");
+        recordedBlob = null;
+
+    } else {
+
+        alert("Take 5 uploaded!\n\nAll 5 takes have been submitted.\nThank you!");
+
+        document.getElementById("recordGuideBtn").disabled = true;
+
+    }
 
 }
-}
-
 function rerecord() {
 
     recordedBlob = null;
