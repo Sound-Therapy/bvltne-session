@@ -354,7 +354,34 @@ async function openSession(id) {
         data.lyrics;
 
     window.currentSession = data;
+const { data: takes, error: takeError } =
+    await db.storage
+        .from("recordings")
+        .list(data.session_token);
 
+const takeList = document.getElementById("takeList");
+
+if (takeError) {
+    takeList.innerHTML = "Unable to load takes.";
+    return;
+}
+
+if (!takes || takes.length === 0) {
+    takeList.innerHTML = "No takes yet.";
+    return;
+}
+
+takeList.innerHTML = "";
+
+takes.forEach(file => {
+
+    takeList.innerHTML += `
+        <div style="padding:10px;border-bottom:1px solid #444;">
+            ${file.name}
+        </div>
+    `;
+
+});
 }
 async function playWithGuide() {
 
