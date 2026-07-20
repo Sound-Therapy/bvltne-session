@@ -174,7 +174,7 @@ async function submitRecording() {
     }
 
     const fileName = `take${currentTake}.webm`;
-
+    console.log(fileName);
     const path =
         `${window.currentSession.session_token}/${fileName}`;
 
