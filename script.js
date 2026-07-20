@@ -68,7 +68,7 @@ function backToHome() {
 
     document.getElementById("homePage").classList.remove("hidden");
 
-    document.getElementById("artistSessionPanel").classList.add("hidden");
+    document.getElementById("sessionPanel").classList.add("hidden");
     document.getElementById("sessionManagerPanel").classList.add("hidden");
     document.getElementById("newSessionPanel").classList.add("hidden");
 
@@ -123,7 +123,7 @@ document
     .classList
     .add("hidden");
 document
-    .getElementById("artistSessionPanel")
+    .getElementById("sessionPanel")
     .classList
     .add("hidden");
     }
@@ -339,7 +339,7 @@ async function openSession(id) {
         .add("hidden");
 
     document
-        .getElementById("artistSessionPanel")
+        .getElementById("sessionPanel")
         .classList
         .remove("hidden");
 
@@ -725,7 +725,7 @@ document.getElementById("newSessionBtn")
                 .classList
                 .add("hidden");
 
-            document.getElementById("artistSessionPanel")
+            document.getElementById("sessionPanel")
                 .classList
                 .remove("hidden");
 
@@ -798,7 +798,7 @@ if (localStorage.getItem("artistMode") === "true") {
         .add("hidden");
 
     document
-        .getElementById("artistSessionPanel")
+        .getElementById("sessionPanel")
         .classList
         .remove("hidden");
 
