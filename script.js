@@ -339,7 +339,7 @@ async function openSession(id) {
         .add("hidden");
 
     document
-        .getElementById("artistsessionPanel")
+        .getElementById("artistSessionPanel")
         .classList
         .remove("hidden");
 
@@ -725,7 +725,7 @@ document.getElementById("newSessionBtn")
                 .classList
                 .add("hidden");
 
-            document.getElementById("artistsessionPanel")
+            document.getElementById("artistSessionPanel")
                 .classList
                 .remove("hidden");
 
@@ -798,7 +798,7 @@ if (localStorage.getItem("artistMode") === "true") {
         .add("hidden");
 
     document
-        .getElementById("artistsessionPanel")
+        .getElementById("artistSessionPanel")
         .classList
         .remove("hidden");
 
