@@ -343,40 +343,18 @@ async function openSession(id) {
         .classList
         .remove("hidden");
 
-   document
-    .getElementById("currentSessionName")
-    .innerText =
-    data.session_name;
+    document
+        .getElementById("currentSessionName")
+        .innerText =
+        data.session_name;
 
-window.currentSession = data;
-const { data: takes, error: takeError } =
-    await db.storage
-        .from("recordings")
-        .list(data.session_token);
+    document
+        .getElementById("currentLyrics")
+        .innerText =
+        data.lyrics;
 
-const takeList = document.getElementById("takeList");
+    window.currentSession = data;
 
-if (takeError) {
-    takeList.innerHTML = "Unable to load takes.";
-    return;
-}
-
-if (!takes || takes.length === 0) {
-    takeList.innerHTML = "No takes yet.";
-    return;
-}
-
-takeList.innerHTML = "";
-
-takes.forEach(file => {
-
-    takeList.innerHTML += `
-        <div style="padding:10px;border-bottom:1px solid #444;">
-            ${file.name}
-        </div>
-    `;
-
-});
 }
 async function playWithGuide() {
 
