@@ -1054,9 +1054,10 @@ console.log(JSON.stringify(files, null, 2));
         alert("No takes found.");
         return;
     }
-
+console.log(window.currentSession.session_token);
     const { data: removed, error: removeError } = await db.storage
     .from("recordings")
+        
     .remove(paths);
 
 console.log("REMOVED =", removed);
