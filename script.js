@@ -28,6 +28,8 @@ function hideAll() {
     document.getElementById("loginPage").classList.add("hidden");
     document.getElementById("producerPage").classList.add("hidden");
 
+    document.getElementById("sessionPanel").classList.add("hidden");
+    document.getElementById("producerSessionPanel").classList.add("hidden");
 }
 function closeRecordingModal(){
 
