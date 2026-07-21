@@ -379,9 +379,7 @@ files.forEach(file => {
 
     if (file.name === ".emptyFolderPlaceholder") return;
 
-    files.forEach(file => {
-
-    if (file.name === ".emptyFolderPlaceholder") return;
+   
 
     const takeName = file.name.replace(".webm", "");
 
@@ -407,7 +405,6 @@ takeList.innerHTML += `
         </button>
     </div>
 `;
-});
 }
 async function playWithGuide() {
 
