@@ -20,6 +20,23 @@ const db = window.supabase.createClient(
 console.log("BVLTNE Connected");
 
 let currentAudio = null;
+const { FFmpeg } = FFmpegWASM;
+
+const ffmpeg = new FFmpeg();
+
+let ffmpegLoaded = false;
+
+async function loadFFmpeg() {
+
+    if (ffmpegLoaded) return;
+
+    await ffmpeg.load();
+
+    ffmpegLoaded = true;
+
+    console.log("FFmpeg Loaded");
+
+}
 // ---------- Page Control ----------
 
 function hideAll() {
