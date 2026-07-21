@@ -37,6 +37,64 @@ async function loadFFmpeg() {
     console.log("FFmpeg Loaded");
 
 }
+async function downloadWav(fileName) {
+
+    try {
+
+        await loadFFmpeg();
+
+        const { data, error } = await db.storage
+            .from("recordings")
+            .createSignedUrl(
+                `${window.currentSession.session_token}/${fileName}`,
+                60
+            );
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        // 다운로드
+        const response = await fetch(data.signedUrl);
+        const webmData = new Uint8Array(await response.arrayBuffer());
+
+        // ffmpeg 가상 파일시스템
+        await ffmpeg.writeFile("input.webm", webmData);
+
+        // WAV 변환
+        await ffmpeg.exec([
+            "-i",
+            "input.webm",
+            "output.wav"
+        ]);
+
+        // 결과 읽기
+        const wavData = await ffmpeg.readFile("output.wav");
+
+        // 다운로드
+        const blob = new Blob([wavData.buffer], {
+            type: "audio/wav"
+        });
+
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName.replace(".webm", ".wav");
+        a.click();
+
+        URL.revokeObjectURL(url);
+
+    }
+    catch (err) {
+
+        console.error(err);
+        alert("WAV conversion failed.");
+
+    }
+
+}
 // ---------- Page Control ----------
 
 function hideAll() {
@@ -412,7 +470,12 @@ files.forEach(file => {
     style="font-size:11px;padding:2px 6px;">
     ▶
 </button>
-        <button style="font-size:11px;padding:2px 6px;">⬇</button>
+        <button
+    class="downloadWavBtn"
+    data-file="${file.name}"
+    style="font-size:11px;padding:2px 6px;">
+    WAV
+</button>
     </div>
 
 </div>
@@ -427,6 +490,15 @@ takeList.innerHTML += `
         </button>
     </div>
 `;
+    document.querySelectorAll(".downloadWavBtn").forEach(btn => {
+
+    btn.onclick = function () {
+
+        downloadWav(this.dataset.file);
+
+    };
+
+});
     document.querySelectorAll(".playTakeBtn").forEach(btn => {
 
     btn.onclick = async function () {
