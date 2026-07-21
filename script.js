@@ -469,6 +469,7 @@ takeList.innerHTML += `
     };
 
 });
+    document.getElementById("deleteAllTakesBtn").onclick = deleteAllTakes;
 }
 async function playWithGuide() {
 
@@ -1026,6 +1027,46 @@ async function blobToWav(webmBlob) {
     await audioCtx.close();
 
     return new Blob([buffer], { type: "audio/wav" });
+
+}
+async function deleteAllTakes() {
+
+    if (!confirm("Delete ALL takes?\n\nThis cannot be undone.")) {
+        return;
+    }
+
+    const { data: files, error } = await db.storage
+        .from("recordings")
+        .list(window.currentSession.session_token);
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    const paths = files
+        .filter(f => f.name !== ".emptyFolderPlaceholder")
+        .map(f =>
+            `${window.currentSession.session_token}/${f.name}`
+        );
+
+    if (paths.length === 0) {
+        alert("No takes found.");
+        return;
+    }
+
+    const { error: removeError } = await db.storage
+        .from("recordings")
+        .remove(paths);
+
+    if (removeError) {
+        alert(removeError.message);
+        return;
+    }
+
+    alert("All takes deleted.");
+
+    openSession(window.currentSession.id);
 
 }
 async function downloadWav(fileName) {
