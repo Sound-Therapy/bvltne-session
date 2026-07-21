@@ -389,7 +389,12 @@ files.forEach(file => {
     <span>🎤 ${takeName}</span>
 
     <div style="display:flex;gap:4px;">
-        <button style="font-size:11px;padding:2px 6px;">▶</button>
+        <button
+    class="playTakeBtn"
+    data-file="${file.name}"
+    style="font-size:11px;padding:2px 6px;">
+    ▶
+</button>
         <button style="font-size:11px;padding:2px 6px;">⬇</button>
     </div>
 
@@ -405,6 +410,34 @@ takeList.innerHTML += `
         </button>
     </div>
 `;
+    document.querySelectorAll(".playTakeBtn").forEach(btn => {
+
+    btn.onclick = async function () {
+
+        const fileName = this.dataset.file;
+
+        const { data, error } = await db.storage
+            .from("recordings")
+            .createSignedUrl(
+                `${window.currentSession.session_token}/${fileName}`,
+                60
+            );
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        if (currentAudio) {
+            currentAudio.pause();
+        }
+
+        currentAudio = new Audio(data.signedUrl);
+        currentAudio.play();
+
+    };
+
+});
 }
 async function playWithGuide() {
 
