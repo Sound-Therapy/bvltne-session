@@ -386,28 +386,17 @@ files.forEach(file => {
     const takeName = file.name.replace(".webm", "");
 
     takeList.innerHTML += `
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:10px;
-            border-bottom:1px solid #444;
-        ">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #333;">
 
-            <span>🎤 ${takeName}</span>
+    <span>🎤 ${takeName}</span>
 
-            <div>
-                <button class="playTakeBtn">
-                    ▶ Play
-                </button>
+    <div style="display:flex;gap:4px;">
+        <button style="font-size:11px;padding:2px 6px;">▶</button>
+        <button style="font-size:11px;padding:2px 6px;">⬇</button>
+    </div>
 
-                <button class="downloadTakeBtn">
-                    ⬇ Download
-                </button>
-            </div>
-
-        </div>
-    `;
+</div>
+`;
 
 });
 
