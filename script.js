@@ -1038,7 +1038,7 @@ async function deleteAllTakes() {
     const { data: files, error } = await db.storage
         .from("recordings")
         .list(window.currentSession.session_token);
-
+console.log(JSON.stringify(files, null, 2));
     if (error) {
         alert(error.message);
         return;
