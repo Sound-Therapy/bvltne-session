@@ -20,79 +20,8 @@ const db = window.supabase.createClient(
 console.log("BVLTNE Connected");
 
 let currentAudio = null;
-const { FFmpeg } = FFmpegWASM;
 
-const ffmpeg = new FFmpeg();
 
-let ffmpegLoaded = false;
-
-async function loadFFmpeg() {
-
-    if (ffmpegLoaded) return;
-
-    await ffmpeg.load();
-
-    ffmpegLoaded = true;
-
-    console.log("FFmpeg Loaded");
-
-}
-async function downloadWav(fileName) {
-
-    try {
-
-        await loadFFmpeg();
-
-        const { data, error } = await db.storage
-            .from("recordings")
-            .createSignedUrl(
-                `${window.currentSession.session_token}/${fileName}`,
-                60
-            );
-
-        if (error) {
-            alert(error.message);
-            return;
-        }
-
-        // 다운로드
-        const response = await fetch(data.signedUrl);
-        const webmData = new Uint8Array(await response.arrayBuffer());
-
-        // ffmpeg 가상 파일시스템
-        await ffmpeg.writeFile("input.webm", webmData);
-
-        // WAV 변환
-        await ffmpeg.exec([
-            "-i",
-            "input.webm",
-            "output.wav"
-        ]);
-
-        // 결과 읽기
-        const wavData = await ffmpeg.readFile("output.wav");
-
-        // 다운로드
-        const blob = new Blob([wavData.buffer], {
-            type: "audio/wav"
-        });
-
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = fileName.replace(".webm", ".wav");
-        a.click();
-
-        URL.revokeObjectURL(url);
-
-    }
-    catch (err) {
-
-    console.error(err);
-    alert(err.message);
-
-}
 
 }
 // ---------- Page Control ----------
