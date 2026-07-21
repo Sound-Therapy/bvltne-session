@@ -1055,9 +1055,12 @@ async function deleteAllTakes() {
         return;
     }
 
-    const { error: removeError } = await db.storage
-        .from("recordings")
-        .remove(paths);
+    const { data: removed, error: removeError } = await db.storage
+    .from("recordings")
+    .remove(paths);
+
+console.log("REMOVED =", removed);
+console.log("REMOVE ERROR =", removeError);
 console.log(paths);
 console.log(removeError);
     if (removeError) {
