@@ -160,7 +160,10 @@ function playRecording() {
         return;
 
     }
+const submitBtn = document.getElementById("submitBtn");
 
+submitBtn.disabled = true;
+submitBtn.innerText = "⏳ Converting...";
     currentAudio = new Audio(
         URL.createObjectURL(recordedBlob)
     );
@@ -185,7 +188,7 @@ const path =
     `${window.currentSession.session_token}/${fileName}`;
 
 const wavBlob = await blobToWav(recordedBlob);
-
+submitBtn.innerText = "⬆ Uploading...";
 const { data, error } =
     await db.storage
         .from("recordings")
@@ -203,11 +206,14 @@ const { data, error } =
 
     if (error) {
 
-        alert(error.message);
-        return;
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Submit";
 
-    }
+    alert(error.message);
+    return;
 
+}
+    submitBtn.innerText = "✅ Uploaded!";
     closeRecordingModal();
 
     if (currentTake < 5) {
@@ -220,7 +226,8 @@ const { data, error } =
             `Record Take ${currentTake}`;
 
         recordedBlob = null;
-
+submitBtn.disabled = false;
+submitBtn.innerText = "Submit";
     } else {
 
         alert("Take 5 uploaded!\n\nAll 5 takes have been submitted.\nThank you!");
