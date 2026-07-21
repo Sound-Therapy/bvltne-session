@@ -392,6 +392,35 @@ catch (e) {
 
 }
 }
+async function playWithoutGuide() {
+
+    if (!window.currentSession) {
+        alert("No current session");
+        return;
+    }
+
+    const { data, error } = await db.storage
+        .from("instrumentals")
+        .createSignedUrl(
+            window.currentSession.instrumental_path,
+            3600
+        );
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    currentAudio = new Audio(data.signedUrl);
+
+    try {
+        await currentAudio.play();
+    }
+    catch (e) {
+        alert(e.message);
+    }
+
+}
 async function recordWithGuide() {
 
     try {
