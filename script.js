@@ -358,7 +358,33 @@ async function openSession(id) {
         data.lyrics;
 
     window.currentSession = data;
+    const { data: files, error: fileError } =
+    await db.storage
+        .from("recordings")
+        .list(data.session_token);
 
+const takeList = document.getElementById("producerTakeList");
+
+if (fileError) {
+    takeList.innerHTML = "Unable to load takes.";
+    return;
+}
+
+if (!files || files.length === 0) {
+    takeList.innerHTML = "No takes yet.";
+    return;
+}
+
+takeList.innerHTML = "";
+files.forEach(file => {
+
+    takeList.innerHTML += `
+        <div style="padding:10px;border-bottom:1px solid #444;">
+            🎤 ${file.name}
+        </div>
+    `;
+
+});
 }
 async function playWithGuide() {
 
