@@ -416,7 +416,7 @@ files.forEach(file => {
     class="downloadWavBtn"
     data-file="${file.name}"
     style="font-size:11px;padding:2px 6px;">
-    WAV
+    Download
 </button>
     </div>
 
