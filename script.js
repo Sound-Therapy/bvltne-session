@@ -766,13 +766,17 @@ async function updateSession() {
     const sessionName = document.getElementById("sessionName").value.trim();
     const lyrics = document.getElementById("lyrics").value.trim();
 
-    const { error } = await db
-        .from("sessions")
-        .update({
-            session_name: sessionName,
-            lyrics: lyrics
-        })
-        .eq("id", editingSessionId);
+   const { data, error } = await db
+    .from("sessions")
+    .update({
+        session_name: sessionName,
+        lyrics: lyrics
+    })
+    .eq("id", Number(editingSessionId))
+    .select();
+
+console.log("Updated rows:", data);
+console.log("Error:", error);
 
     if (error) {
 
