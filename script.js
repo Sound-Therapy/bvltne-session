@@ -881,6 +881,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document
     .getElementById("submitBtn")
     ?.addEventListener("click", submitRecording);
+    document.getElementById("producerBackBtn")
+    ?.addEventListener("click", editSession);
     document.getElementById("recordStopBtn")
     ?.addEventListener("click", stopAudio);
     document.getElementById("rerecordBtn")
