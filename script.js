@@ -646,6 +646,11 @@ document
     }
 
 }
+async function recordWithoutGuide() {
+
+    alert("Record without Guide");
+
+}
 
 async function joinSession() {
 
@@ -992,6 +997,8 @@ document.getElementById("newSessionBtn")
     ?.addEventListener("click", playWithGuide);
     document.getElementById("recordGuideBtn")
     ?.addEventListener("click", recordWithGuide);
+    document.getElementById("recordNoGuideBtn")
+    ?.addEventListener("click", recordWithoutGuide);
 document.getElementById("practiceNoGuideBtn")
     ?.addEventListener("click", playWithoutGuide);
     document.getElementById("instrumentalFile")
