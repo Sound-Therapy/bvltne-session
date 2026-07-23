@@ -596,14 +596,15 @@ async function recordWithGuide() {
         window.recordStream = stream;
 
         recordedChunks = [];
-document
-    .getElementById("recordingModal")
-    .classList
-    .add("hidden");
-        
-mediaRecorder = new MediaRecorder(stream);
 
-        mediaRecorder.ondataavailable = function(event) {
+        document
+            .getElementById("recordingModal")
+            .classList
+            .add("hidden");
+
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = function (event) {
 
             if (event.data.size > 0) {
 
@@ -612,42 +613,56 @@ mediaRecorder = new MediaRecorder(stream);
             }
 
         };
+
         mediaRecorder.onstop = function () {
 
-    recordedBlob = new Blob(recordedChunks, {
-    type: mediaRecorder.mimeType
-});
+            recordedBlob = new Blob(recordedChunks, {
+                type: mediaRecorder.mimeType
+            });
+
             document
-    .getElementById("recordingStatus")
-    .classList
-    .add("hidden");
-    alert("Recording finished.");
-document
-    .getElementById("recordGuideBtn")
-    .classList
-    .add("hidden");
+                .getElementById("recordingStatus")
+                .classList
+                .add("hidden");
 
-document
-    .getElementById("recordNoGuideBtn")
-    .classList
-    .add("hidden");
-document
-    .getElementById("recordingModal")
-    .classList
-    .remove("hidden");
-};
+            document
+                .getElementById("recordGuideBtn")
+                .classList
+                .remove("hidden");
+
+            document
+                .getElementById("recordNoGuideBtn")
+                .classList
+                .remove("hidden");
+
+            document
+                .getElementById("recordingModal")
+                .classList
+                .remove("hidden");
+
+            alert("Recording finished.");
+
+        };
+
         mediaRecorder.start();
-document
-    .getElementById("recordGuideBtn")
-    .classList
-    .add("hidden");
 
-document
-    .getElementById("recordingStatus")
-    .classList
-    .remove("hidden");
-        
+        document
+            .getElementById("recordGuideBtn")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("recordNoGuideBtn")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("recordingStatus")
+            .classList
+            .remove("hidden");
+
         await playWithGuide();
+
     }
 
     catch (err) {
