@@ -583,11 +583,7 @@ async function playWithoutGuide() {
 
 }
 
-catch (e) {
 
-    alert(e.message);
-
-}
 async function recordWithGuide() {
 
     try {
