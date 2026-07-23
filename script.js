@@ -39,9 +39,19 @@ function hideAll() {
 function closeRecordingModal(){
 
     document
-    .getElementById("recordingModal")
-    .classList
-    .add("hidden");
+        .getElementById("recordingModal")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("recordGuideBtn")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("recordNoGuideBtn")
+        .classList
+        .remove("hidden");
 
 }
 function goHome() {
@@ -1085,6 +1095,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document
     .getElementById("submitBtn")
     ?.addEventListener("click", submitRecording);
+    document
+    .getElementById("closeRecordingBtn")
+    .addEventListener("click", closeRecordingModal);
     document.getElementById("producerBackBtn")
     ?.addEventListener("click", editSession);
     document.getElementById("recordStopBtn")
