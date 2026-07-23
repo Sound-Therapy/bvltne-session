@@ -549,33 +549,27 @@ catch (e) {
 
 }
 }
-async function playWithoutGuide() {
+currentAudio = new Audio();
 
-    if (!window.currentSession) {
-        alert("No current session");
-        return;
-    }
+currentAudio.preload = "auto";
+currentAudio.src = data.signedUrl;
 
-    const { data, error } = await db.storage
-        .from("instrumentals")
-        .createSignedUrl(
-            window.currentSession.instrumental_path,
-            3600
-        );
+await new Promise((resolve, reject) => {
 
-    if (error) {
-        alert(error.message);
-        return;
-    }
+    currentAudio.oncanplaythrough = resolve;
+    currentAudio.onerror = reject;
 
-    currentAudio = new Audio(data.signedUrl);
+});
 
-    try {
-        await currentAudio.play();
-    }
-    catch (e) {
-        alert(e.message);
-    }
+try {
+
+    await currentAudio.play();
+
+}
+
+catch (e) {
+
+    alert(e.message);
 
 }
 async function recordWithGuide() {
@@ -648,53 +642,80 @@ document
 }
 async function recordWithoutGuide() {
 
-    if (!window.currentSession) {
-        alert("No current session");
-        return;
+    try {
+
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+                audio: true
+            });
+
+        window.recordStream = stream;
+
+        recordedChunks = [];
+
+        document
+            .getElementById("recordingModal")
+            .classList
+            .add("hidden");
+
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = function(event) {
+
+            if (event.data.size > 0) {
+
+                recordedChunks.push(event.data);
+
+            }
+
+        };
+
+        mediaRecorder.onstop = function () {
+
+            recordedBlob = new Blob(recordedChunks, {
+                type: mediaRecorder.mimeType
+            });
+
+            document
+                .getElementById("recordingStatus")
+                .classList
+                .add("hidden");
+
+            alert("Recording finished.");
+
+            document
+                .getElementById("recordNoGuideBtn")
+                .classList
+                .remove("hidden");
+
+            document
+                .getElementById("recordingModal")
+                .classList
+                .remove("hidden");
+
+        };
+
+        mediaRecorder.start();
+
+        document
+            .getElementById("recordNoGuideBtn")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("recordingStatus")
+            .classList
+            .remove("hidden");
+
+        await playWithoutGuide();
+
     }
 
-    audioChunks = [];
+    catch (err) {
 
-    const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true
-    });
+        alert("Microphone permission denied.");
 
-    mediaRecorder = new MediaRecorder(stream);
-
-    mediaRecorder.ondataavailable = function (event) {
-
-        audioChunks.push(event.data);
-
-    };
-
-    mediaRecorder.onstop = async function () {
-
-        const blob = new Blob(audioChunks, {
-            type: "audio/webm"
-        });
-
-        await uploadTake(blob);
-
-        stream.getTracks().forEach(track => track.stop());
-
-    };
-
-    mediaRecorder.start();
-
-    document
-        .getElementById("recordGuideBtn")
-        .classList
-        .add("hidden");
-
-    document
-        .getElementById("recordNoGuideBtn")
-        .classList
-        .add("hidden");
-
-    document
-        .getElementById("recordingStatus")
-        .classList
-        .remove("hidden");
+    }
 
 }
 
